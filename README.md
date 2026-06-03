@@ -1,36 +1,222 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Learning Risk Identification Platform
+
+## Overview
+
+Millions of children struggle in classrooms not because they lack ability, but because learning challenges are often identified too late.
+
+In many schools, teachers rely on informal observation rather than structured tools to identify students who may need additional support. By the time a student is recognized as struggling, the learning gap has already widened.
+
+The Learning Risk Identification Platform helps teachers proactively identify students who may be at academic risk through structured classroom observations and actionable insights.
+
+---
+
+## Problem Statement
+
+Early learning difficulties frequently go undetected, especially in under-resourced schools where access to psychologists and formal screening tools is limited.
+
+This can lead to:
+
+* Repeated academic failure
+* Reduced confidence and motivation
+* Delayed interventions
+* Long-term educational inequality
+
+Teachers need a simple, affordable, and scalable way to identify students who may require additional support before learning gaps become permanent.
+
+---
+
+## Solution
+
+The platform enables teachers to:
+
+* Record structured classroom observations
+* Track student learning indicators
+* Calculate risk scores
+* Identify students requiring additional attention
+* Monitor progress over time
+* Generate intervention recommendations
+
+The system is designed to support teachers, not replace professional assessment.
+
+---
+
+## Key Features
+
+### Teacher Dashboard
+
+Provides a classroom-wide overview of student learning status.
+
+### Student Monitoring
+
+Track individual students across multiple learning indicators.
+
+### Risk Scoring Engine
+
+Calculates an overall learning risk score based on teacher observations.
+
+### Early Intervention Support
+
+Highlights students who may benefit from additional instructional support.
+
+### Future AI Insights
+
+Generate:
+
+* Learning pattern summaries
+* Suggested classroom interventions
+* Parent engagement recommendations
+
+---
+
+## Current MVP
+
+Implemented:
+
+* Landing Page
+* Teacher Dashboard
+* Student List
+* Risk Calculation Logic
+* Next.js Frontend
+
+Upcoming:
+
+* Observation Forms
+* Student Management
+* Trend Analysis
+* Authentication
+* Database Integration
+* AI Recommendations
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* Next.js 15
+* React
+* TypeScript
+* Tailwind CSS
+
+### Backend (Planned)
+
+* Next.js Server Actions
+* Supabase
+
+### AI Layer (Planned)
+
+* OpenAI API
+
+### Deployment
+
+* Vercel
+
+---
+
+## Project Structure
+
+```text
+learning-risk-platform
+│
+├── app
+│   ├── dashboard
+│   ├── students
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components
+│
+├── lib
+│   └── risk-engine.ts
+│
+├── public
+│
+└── package.json
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Clone Repository
+
+```bash
+git clone https://github.com/Supreetkaur1/learning-risk-platform.git
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Risk Assessment Approach
 
-To learn more about Next.js, take a look at the following resources:
+Teachers provide ratings for:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Reading Fluency
+* Attention
+* Following Instructions
+* Writing Skills
+* Numeracy Skills
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+These inputs are processed through a weighted scoring model to identify students who may require additional support.
 
-## Deploy on Vercel
+The platform does not diagnose learning disorders and should not be considered a replacement for professional educational or psychological assessment.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future Roadmap
+
+### Phase 1
+
+* Observation Forms
+* Student Profiles
+* Risk Dashboard
+
+### Phase 2
+
+* Authentication
+* Supabase Integration
+* Historical Tracking
+
+### Phase 3
+
+* AI-Powered Recommendations
+* Parent Reports
+* Teacher Insights
+
+### Phase 4
+
+* School-Level Analytics
+* Multi-Classroom Support
+* District-Level Reporting
+
+---
+
+## Impact
+
+Our goal is to help educators identify learning challenges earlier, intervene sooner, and ensure that every child receives the support they need before learning gaps become barriers to future opportunity.
+
+---
+
+## Author
+
+Supreet Kaur
+
+Software Development Engineer
+
