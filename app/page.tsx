@@ -5,16 +5,24 @@ export default function Home() {
         Learning Risk Identification Platform
       </h1>
 
-      <p className="mt-6 text-lg">
-        Early classroom support through structured teacher observations.
+      <p className="mt-6 text-lg max-w-3xl">
+        Identify learning risks early through structured
+        classroom observations and actionable teacher insights.
       </p>
 
-      <div className="mt-8">
+      <div className="mt-8 flex gap-4">
+        <a
+          href="/assessment"
+          className="rounded bg-black px-6 py-3 text-white"
+        >
+          Try Live Demo
+        </a>
+
         <a
           href="/dashboard"
-          className="rounded bg-black px-4 py-2 text-white"
+          className="rounded border px-6 py-3"
         >
-          Open Dashboard
+          Dashboard
         </a>
       </div>
     </main>

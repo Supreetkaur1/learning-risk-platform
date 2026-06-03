@@ -6,7 +6,7 @@ export default function StudentsPage() {
       </h1>
 
       <p className="mt-4">
-        Student management coming soon.
+        Student profiles will appear here in Phase 2.
       </p>
     </main>
   );
