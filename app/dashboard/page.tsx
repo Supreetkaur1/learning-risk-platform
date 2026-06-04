@@ -2,181 +2,79 @@
 
 import { useEffect, useState } from "react";
 
-type Assessment = {
-  studentName: string;
-  score: number;
-  status: string;
-  date: string;
-};
+import DashboardStats from "./DashboardStats";
+import AssessmentTable from "./AssessmentTable";
+import InterventionQueue from "./InterventionQueue";
+import AIInsights from "./AIInsights";
+import RiskDistribution from "./RiskDistribution";
 
-export default function Dashboard() {
-  const [assessments, setAssessments] = useState<Assessment[]>([]);
+export default function DashboardPage() {
+  const [assessments, setAssessments] =
+    useState<any[]>([]);
 
   useEffect(() => {
-    const saved = JSON.parse(
-      localStorage.getItem("assessments") || "[]"
+    const data = JSON.parse(
+      localStorage.getItem(
+        "assessments"
+      ) || "[]"
     );
 
-    setAssessments(saved);
+    setAssessments(data);
   }, []);
 
-  const excellent = assessments.filter(
-    (s) => s.status === "Excellent"
-  );
-
-  const onTrack = assessments.filter(
-    (s) => s.status === "On Track"
-  );
-
-  const monitoring = assessments.filter(
-    (s) => s.status === "Monitoring Required"
-  );
-
-  const mightNeedHelp = assessments.filter(
-    (s) => s.status === "Might Need Help"
-  );
-
-  const needHelp = assessments.filter(
-    (s) => s.status === "Need Help"
-  );
-
-  const categories = [
-    {
-      title: "Excellent",
-      students: excellent,
-    },
-    {
-      title: "On Track",
-      students: onTrack,
-    },
-    {
-      title: "Monitoring Required",
-      students: monitoring,
-    },
-    {
-      title: "Might Need Help",
-      students: mightNeedHelp,
-    },
-    {
-      title: "Need Help",
-      students: needHelp,
-    },
-  ];
-
   return (
-    <main className="p-8">
-      <h1 className="text-4xl font-bold mb-8">
-        Teacher Dashboard
-      </h1>
+    <main
+      className="
+        min-h-screen
+        bg-gradient-to-br
+        from-blue-50
+        via-white
+        to-green-50
+        p-8
+      "
+    >
+      <div className="max-w-7xl mx-auto">
 
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
-        <SummaryCard
-          title="Excellent"
-          count={excellent.length}
-        />
-
-        <SummaryCard
-          title="On Track"
-          count={onTrack.length}
-        />
-
-        <SummaryCard
-          title="Monitoring"
-          count={monitoring.length}
-        />
-
-        <SummaryCard
-          title="Might Need Help"
-          count={mightNeedHelp.length}
-        />
-
-        <SummaryCard
-          title="Need Help"
-          count={needHelp.length}
-        />
-      </div>
-
-      {categories.map((category) => (
-        <div
-          key={category.title}
-          className="mb-10"
+        <h1
+          className="
+            text-5xl
+            font-bold
+            text-blue-700
+            mb-8
+          "
         >
-          <h2 className="text-2xl font-semibold mb-3">
-            {category.title}
-          </h2>
+          Learning Analytics Dashboard
+        </h1>
 
-          <table className="w-full border-collapse border">
-            <thead>
-              <tr>
-                <th className="border p-2">
-                  Student
-                </th>
+        <DashboardStats
+          assessments={assessments}
+        />
 
-                <th className="border p-2">
-                  Score
-                </th>
+        <div className="grid lg:grid-cols-2 gap-8 mt-8">
 
-                <th className="border p-2">
-                  Date
-                </th>
-              </tr>
-            </thead>
+          <RiskDistribution
+            assessments={assessments}
+          />
 
-            <tbody>
-              {category.students.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={3}
-                    className="border p-4 text-center"
-                  >
-                    No students
-                  </td>
-                </tr>
-              ) : (
-                category.students.map(
-                  (student, index) => (
-                    <tr key={index}>
-                      <td className="border p-2">
-                        {student.studentName}
-                      </td>
+          <AssessmentTable
+            assessments={assessments}
+          />
 
-                      <td className="border p-2">
-                        {student.score.toFixed(
-                          0
-                        )}
-                      </td>
-
-                      <td className="border p-2">
-                        {student.date}
-                      </td>
-                    </tr>
-                  )
-                )
-              )}
-            </tbody>
-          </table>
         </div>
-      ))}
+
+        <div className="mt-8">
+
+          <InterventionQueue
+            assessments={assessments}
+          />
+
+        </div>
+
+        <div className="mt-8">
+          <AIInsights />
+        </div>
+
+      </div>
     </main>
-  );
-}
-
-function SummaryCard({
-  title,
-  count,
-}: {
-  title: string;
-  count: number;
-}) {
-  return (
-    <div className="border rounded-lg p-4">
-      <div className="text-sm text-gray-500">
-        {title}
-      </div>
-
-      <div className="text-3xl font-bold">
-        {count}
-      </div>
-    </div>
   );
 }
