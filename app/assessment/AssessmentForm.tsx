@@ -8,70 +8,17 @@ import {
   getRecommendation,
 } from "@/lib/risk-engine";
 
-const QUESTIONS = [
-  {
-    category: "Reading Skills",
-    question:
-      "Can the student read age-appropriate text aloud?",
-  },
-  {
-    category: "Reading Skills",
-    question:
-      "Can the student understand what they read?",
-  },
-  {
-    category: "Attention",
-    question:
-      "Can the student stay focused for at least 10 minutes?",
-  },
-  {
-    category: "Attention",
-    question:
-      "Does the student complete classroom activities?",
-  },
-  {
-    category: "Instructions",
-    question:
-      "Can the student follow 2-3 step instructions?",
-  },
-  {
-    category: "Instructions",
-    question:
-      "Can the student follow classroom routines independently?",
-  },
-  {
-    category: "Writing",
-    question:
-      "Can the student write age-appropriate sentences?",
-  },
-  {
-    category: "Writing",
-    question:
-      "Is the student's writing generally legible?",
-  },
-  {
-    category: "Numeracy",
-    question:
-      "Can the student solve age-appropriate math problems?",
-  },
-  {
-    category: "Numeracy",
-    question:
-      "Can the student recognize and work with numbers confidently?",
-  },
-];
-
-const OPTIONS = [
-  { label: "Always", value: 5 },
-  { label: "Often", value: 4 },
-  { label: "Sometimes", value: 3 },
-  { label: "Rarely", value: 2 },
-  { label: "Never", value: 1 },
-];
+import {
+  QUESTIONS,
+  OPTIONS,
+} from "./questions";
 
 export default function AssessmentForm() {
   const [studentName, setStudentName] =
     useState("");
+
+  const [currentQuestion, setCurrentQuestion] =
+    useState(0);
 
   const [answers, setAnswers] =
     useState(Array(QUESTIONS.length).fill(3));
@@ -85,13 +32,36 @@ export default function AssessmentForm() {
   const [aiPlan, setAiPlan] =
     useState("");
 
+  const progress =
+    ((currentQuestion + 1) /
+      QUESTIONS.length) *
+    100;
+
   function updateAnswer(
-    index: number,
     value: number
   ) {
     const copy = [...answers];
-    copy[index] = value;
+    copy[currentQuestion] = value;
     setAnswers(copy);
+  }
+
+  function nextQuestion() {
+    if (
+      currentQuestion <
+      QUESTIONS.length - 1
+    ) {
+      setCurrentQuestion(
+        currentQuestion + 1
+      );
+    }
+  }
+
+  function previousQuestion() {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(
+        currentQuestion - 1
+      );
+    }
   }
 
   function calculate() {
@@ -100,7 +70,8 @@ export default function AssessmentForm() {
       return;
     }
 
-    const score = calculateRisk(answers);
+    const score =
+      calculateRisk(answers);
 
     setAiPlan("");
 
@@ -221,112 +192,201 @@ export default function AssessmentForm() {
 
       </div>
 
-      {/* QUESTIONS */}
+      {/* PROGRESS */}
 
-      {QUESTIONS.map(
-        (q, index) => (
+      <div className="mb-8">
+
+        <div className="flex justify-between mb-2">
+
+          <span className="font-medium">
+            Question {currentQuestion + 1}
+          </span>
+
+          <span className="text-gray-500">
+            {QUESTIONS.length}
+          </span>
+
+        </div>
+
+        <div className="h-3 bg-gray-200 rounded-full">
+
           <div
-            key={index}
             className="
-              bg-white
-              rounded-2xl
-              shadow-md
-              hover:shadow-xl
-              transition
-              p-6
-              mb-6
+              h-3
+              bg-gradient-to-r
+              from-blue-600
+              to-green-500
+              rounded-full
+              transition-all
+              duration-300
+            "
+            style={{
+              width: `${progress}%`,
+            }}
+          />
+
+        </div>
+
+      </div>
+
+      {/* QUESTION CARD */}
+
+      <div
+        className="
+        bg-white
+        rounded-3xl
+        shadow-xl
+        p-10
+        min-h-[420px]
+      "
+      >
+        <div className="mb-6">
+
+          <span
+            className="
+            bg-blue-100
+            text-blue-700
+            px-4
+            py-2
+            rounded-full
+            text-sm
+            font-semibold
+          "
+          >
+            {
+              QUESTIONS[
+                currentQuestion
+              ].category
+            }
+          </span>
+
+        </div>
+
+        <h2
+          className="
+          text-3xl
+          font-bold
+          text-gray-800
+          leading-relaxed
+          mb-12
+        "
+        >
+          {
+            QUESTIONS[
+              currentQuestion
+            ].question
+          }
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-4">
+
+          {OPTIONS.map(
+            (option) => (
+              <button
+                key={option.value}
+                onClick={() =>
+                  updateAnswer(
+                    option.value
+                  )
+                }
+                className={`
+                  p-5
+                  rounded-2xl
+                  border-2
+                  text-left
+                  transition-all
+                  ${
+                    answers[
+                      currentQuestion
+                    ] ===
+                    option.value
+                      ? "border-blue-600 bg-blue-50 shadow-lg"
+                      : "border-gray-200 hover:border-blue-300"
+                  }
+                `}
+              >
+                <div className="font-semibold text-lg">
+                  {option.label}
+                </div>
+              </button>
+            )
+          )}
+
+        </div>
+
+        <div className="flex justify-between mt-12">
+
+          <button
+            onClick={
+              previousQuestion
+            }
+            disabled={
+              currentQuestion === 0
+            }
+            className="
+              px-6
+              py-3
+              rounded-xl
+              border
+              disabled:opacity-40
             "
           >
-            <div className="mb-3">
-              <span className="
-                bg-blue-100
-                text-blue-700
-                px-3
-                py-1
-                rounded-full
-                text-xs
+            Previous
+          </button>
+
+          {currentQuestion ===
+          QUESTIONS.length - 1 ? (
+            <button
+              onClick={
+                calculate
+              }
+              className="
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                px-8
+                py-3
+                rounded-xl
                 font-semibold
-              ">
-                {q.category}
-              </span>
-            </div>
+              "
+            >
+              Generate Assessment
+            </button>
+          ) : (
+            <button
+              onClick={
+                nextQuestion
+              }
+              className="
+                bg-blue-600
+                hover:bg-blue-700
+                text-white
+                px-8
+                py-3
+                rounded-xl
+                font-semibold
+              "
+            >
+              Next
+            </button>
+          )}
 
-            <h3 className="font-semibold text-lg mb-4">
-              {index + 1}. {q.question}
-            </h3>
+        </div>
 
-            <div className="flex flex-wrap gap-3">
-
-              {OPTIONS.map(
-                (option) => (
-                  <label
-                    key={option.value}
-                    className={`
-                      px-4 py-2 rounded-full border
-                      cursor-pointer transition
-                      ${
-                        answers[index] === option.value
-                          ? "bg-blue-600 text-white border-blue-600"
-                          : "bg-white hover:bg-gray-50"
-                      }
-                    `}
-                  >
-                    <input
-                      type="radio"
-                      className="hidden"
-                      checked={
-                        answers[index] ===
-                        option.value
-                      }
-                      onChange={() =>
-                        updateAnswer(
-                          index,
-                          option.value
-                        )
-                      }
-                    />
-
-                    {option.label}
-                  </label>
-                )
-              )}
-
-            </div>
-
-          </div>
-        )
-      )}
-
-      {/* GENERATE */}
-
-      <button
-        onClick={calculate}
-        className="
-          w-full
-          bg-orange-500
-          hover:bg-orange-600
-          text-white
-          font-semibold
-          py-4
-          rounded-2xl
-          shadow-lg
-          transition
-        "
-      >
-        Generate Assessment
-      </button>
+      </div>
 
       {/* RESULTS */}
 
       {result && (
-        <div className="
+        <div
+          className="
           mt-12
           bg-white
           rounded-3xl
           shadow-xl
           p-10
-        ">
-
+        "
+        >
           <h2 className="text-3xl font-bold mb-8">
             Assessment Result
           </h2>
@@ -337,7 +397,6 @@ export default function AssessmentForm() {
               <p className="text-gray-500">
                 Student
               </p>
-
               <h3 className="text-2xl font-bold">
                 {studentName}
               </h3>
@@ -347,7 +406,6 @@ export default function AssessmentForm() {
               <p className="text-gray-500">
                 Risk Score
               </p>
-
               <h3 className="text-2xl font-bold">
                 {result.score.toFixed(0)}
               </h3>
@@ -357,17 +415,12 @@ export default function AssessmentForm() {
               <p className="text-gray-500">
                 Status
               </p>
-
               <h3 className="text-xl font-bold">
                 {result.status}
               </h3>
             </div>
 
           </div>
-
-          <h3 className="font-bold text-xl mb-3">
-            Recommended Actions
-          </h3>
 
           <ul className="list-disc pl-6 space-y-2">
             {result.recommendations.map(
@@ -396,12 +449,10 @@ export default function AssessmentForm() {
               className="
                 mt-8
                 bg-blue-600
-                hover:bg-blue-700
                 text-white
                 px-6
                 py-3
                 rounded-xl
-                font-semibold
               "
             >
               {loadingPlan
@@ -411,7 +462,8 @@ export default function AssessmentForm() {
           )}
 
           {aiPlan && (
-            <div className="
+            <div
+              className="
               mt-8
               bg-gradient-to-r
               from-blue-50
@@ -420,7 +472,8 @@ export default function AssessmentForm() {
               border-blue-100
               rounded-2xl
               p-6
-            ">
+            "
+            >
               <h3 className="text-2xl font-bold mb-4">
                 ✨ AI Recommended Action Plan
               </h3>
@@ -432,7 +485,9 @@ export default function AssessmentForm() {
           )}
 
           <button
-            onClick={saveAssessment}
+            onClick={
+              saveAssessment
+            }
             className="
               mt-8
               bg-green-600
@@ -441,8 +496,6 @@ export default function AssessmentForm() {
               px-8
               py-3
               rounded-xl
-              font-semibold
-              shadow-md
             "
           >
             Save Assessment
