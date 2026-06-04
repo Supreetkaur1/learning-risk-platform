@@ -42,6 +42,26 @@ Generate:
 
 4. Monitoring Strategy
 
+Format exactly as:
+
+## Learning Pattern
+(brief explanation)
+
+## Classroom Actions
+- action 1
+- action 2
+- action 3
+
+## Home Support
+- recommendation 1
+- recommendation 2
+
+## Follow-Up Timeline
+- Week 1-2
+- Week 3-4
+- Week 5-6
+
+
 Keep the response concise, practical, and teacher-friendly.
 `;
 
