@@ -214,7 +214,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-green-600">
-              5+
+              3+
             </h3>
             <p className="mt-2 text-gray-600">
               Schools Reached
@@ -223,7 +223,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-orange-500">
-              30+
+              15+
             </h3>
             <p className="mt-2 text-gray-600">
               Teachers Empowered
@@ -307,15 +307,22 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
 
           <div className="bg-white shadow-xl rounded-xl p-10">
-            Pilot School 1
+            <a href="https://www.instagram.com/newlightmodernsensecschool/">
+  <img src="/new_light.jpg" alt="New Light School, Asr"/>
+</a>
           </div>
 
           <div className="bg-white shadow-xl rounded-xl p-10">
-            Pilot School 2
+            <a href="https://www.facebook.com/navbharathighschoolasr1950/">
+  <img src="/nav_bharat.jpg" alt="Nav Bharat School, Asr"/>
+</a>
           </div>
 
-          <div className="bg-white shadow-xl rounded-xl p-10">
-            Education NGO
+
+       <div className="bg-white shadow-xl rounded-xl p-10">
+            <a href="https://www.facebook.com/p/Govt-Girls-Secondary-school-Putlighar-Amritsar-100071951491058/">
+  <img src="/GSSSS.jpg" alt="GSSSS Putlg School, Asr"/>
+</a>
           </div>
 
         </div>
