@@ -205,7 +205,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-blue-700">
-              500+
+              200+
             </h3>
             <p className="mt-2 text-gray-600">
               Students Assessed
@@ -214,7 +214,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-green-600">
-              20+
+              5+
             </h3>
             <p className="mt-2 text-gray-600">
               Schools Reached
@@ -223,7 +223,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-orange-500">
-              100+
+              30+
             </h3>
             <p className="mt-2 text-gray-600">
               Teachers Empowered
@@ -232,7 +232,7 @@ export default function Home() {
 
           <div className="text-center">
             <h3 className="text-6xl font-bold text-blue-700">
-              95%
+              92%
             </h3>
             <p className="mt-2 text-gray-600">
               Early Risk Detection
