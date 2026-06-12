@@ -336,11 +336,11 @@ export default function Home() {
           </h2>
 
           <p className="text-xl">
-            support@learningforall.org
+            LFA_LearningForALL@outlook.com
           </p>
 
           <p className="mt-3 text-xl">
-            Bangalore, India
+            Amritsar, India
           </p>
 
         </div>
