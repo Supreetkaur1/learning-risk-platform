@@ -74,13 +74,8 @@ Implemented:
 
 * Landing Page
 * Teacher Dashboard
-* Student List
 * Risk Calculation Logic
 * Next.js Frontend
-
-Upcoming:
-
-* Observation Forms
 * Student Management
 * Trend Analysis
 * Authentication
@@ -98,7 +93,7 @@ Upcoming:
 * TypeScript
 * Tailwind CSS
 
-### Backend (Planned)
+### Backend
 
 * Next.js Server Actions
 * Supabase
@@ -113,28 +108,7 @@ Upcoming:
 
 ---
 
-## Project Structure
 
-```text
-learning-risk-platform
-│
-├── app
-│   ├── dashboard
-│   ├── students
-│   ├── layout.tsx
-│   └── page.tsx
-│
-├── components
-│
-├── lib
-│   └── risk-engine.ts
-│
-├── public
-│
-└── package.json
-```
-
----
 
 ## Getting Started
 
@@ -213,6 +187,8 @@ The platform does not diagnose learning disorders and should not be considered a
 Our goal is to help educators identify learning challenges earlier, intervene sooner, and ensure that every child receives the support they need before learning gaps become barriers to future opportunity.
 
 ---
+
+## Built with help of Codex
 
 ## Author
 
